@@ -2,11 +2,15 @@ import React from "react";
 import "./Login.css";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import { useAuth } from "./AuthContext";
 
 function Login() {
-  const { greeting, setGreeting } = useAuth();
+  const { signIn } = useAuth();
+
+  const handleSignIn = () => {
+    signIn();
+  };
+
   return (
     <div className="login">
       <Link to="/" style={{ textDecoration: "none" }}>
@@ -30,7 +34,7 @@ function Login() {
             <button
               type="submit"
               className="login__signInButton"
-              onClick={() => setGreeting("Hello User")}
+              onClick={handleSignIn}
             >
               Sign In
             </button>
@@ -39,7 +43,7 @@ function Login() {
 
         <p>
           By signing-in you agree to the eShop Website Conditions of Use & Sale.
-          Please see our Privacy Notice, our Cookies Notice and our
+          Please see our Privacy Notice, our Cookies Notice, and our
           Interest-Based Ads Notice.
         </p>
       </div>

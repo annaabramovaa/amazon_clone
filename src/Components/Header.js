@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+// Header.js
+import React from "react";
 import "./Header.css";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import StorefrontIcon from "@mui/icons-material/Storefront";
@@ -9,7 +10,12 @@ import { useAuth } from "./AuthContext";
 
 function Header() {
   const [{ basket }, dispatch] = useStateValue();
-  const { greeting } = useAuth();
+  const { greeting, isSignedIn, signOut } = useAuth();
+
+  const handleSignOut = () => {
+    signOut();
+  };
+
   return (
     <div className="header">
       <Link to="/" style={{ textDecoration: "none" }}>
@@ -28,7 +34,12 @@ function Header() {
         <Link to="/login" style={{ textDecoration: "none" }}>
           <div className="nav_item">
             <span className="nav_itemLineOne">{greeting}</span>
-            <span className="nav_itemLineTwo">Sign In</span>
+            <span
+              className="nav_itemLineTwo"
+              onClick={isSignedIn ? handleSignOut : null}
+            >
+              {isSignedIn ? "Sign Out" : "Sign In"}
+            </span>
           </div>
         </Link>
 
